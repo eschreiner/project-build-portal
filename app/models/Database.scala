@@ -31,3 +31,21 @@ object Database extends Schema {
 trait PdpDbEntity extends KeyedEntity[Long] {
     val id: Long = 0
 }
+
+trait PdpDbAccess[E <: PdpDbEntity] {
+
+    val table: Table[E]
+
+    def insert(entity: E): E = inTransaction {
+    	table insert entity
+    }
+
+    def findBy(id: Long): Option[E] = inTransaction {
+        table lookup id
+    }
+
+    def update(entity: E): Unit = inTransaction {
+        table update entity
+    }
+
+}
