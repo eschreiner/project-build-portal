@@ -12,8 +12,12 @@ import org.squeryl.KeyedEntity
  */
 object Database extends Schema {
 
+    val productTable = table[Product]("product")
     val projectTable = table[Project]("project")
 
+    on(productTable) { e => declare (
+        e.id is(autoIncremented)
+    )}
     on(projectTable) { e => declare (
         e.id is(autoIncremented)
     )}
