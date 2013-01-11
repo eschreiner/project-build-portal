@@ -14,11 +14,15 @@ object Database extends Schema {
 
     val productTable = table[Product]("product")
     val projectTable = table[Project]("project")
+    val stakeholderTable = table[Stakeholder]("stakeholder")
 
     on(productTable) { e => declare (
         e.id is(autoIncremented)
     )}
     on(projectTable) { e => declare (
+        e.id is(autoIncremented)
+    )}
+    on(stakeholderTable) { e => declare (
         e.id is(autoIncremented)
     )}
 
