@@ -8,3 +8,11 @@ package models
 case class Stakeholder(name: String, fullname: String, email: String) extends DbEntity {
 
 }
+
+import Database.stakeholderTable
+
+object Stakeholder extends DbAccess[Stakeholder] {
+  
+  val table = stakeholderTable
+  
+}

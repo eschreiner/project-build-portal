@@ -8,3 +8,11 @@ package models
 case class Product(name: String) extends DbEntity {
 
 }
+
+import Database.productTable
+
+object Product extends DbAccess[Product] {
+  
+  val table = productTable
+  
+}
