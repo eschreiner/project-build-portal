@@ -28,11 +28,11 @@ object Database extends Schema {
 
 }
 
-trait PdpDbEntity extends KeyedEntity[Long] {
+trait DbEntity extends KeyedEntity[Long] {
     val id: Long = 0
 }
 
-trait PdpDbAccess[E <: PdpDbEntity] {
+trait DbAccess[E <: DbEntity] {
 
     val table: Table[E]
 
