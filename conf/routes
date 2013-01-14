@@ -5,5 +5,20 @@
 # Home page
 GET     /                           controllers.Application.index
 
+# Suspicious activity
+GET		/suspicious					controllers.Stakeholders.suspicious
+
+# Account pages
+GET		/register					controllers.Stakeholders.showRegistration
+POST	/register					controllers.Stakeholders.register
+GET		/login						controllers.Stakeholders.login
+POST	/login						controllers.Stakeholders.authenticate
+GET		/logout						controllers.Stakeholders.logout
+
+# Projects
+GET		/projects					controllers.Projects.list
+GET		/project/create				controllers.Projects.create
+GET		/project/:project			controllers.Projects.show(project: models.Project)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

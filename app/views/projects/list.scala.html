@@ -1,0 +1,25 @@
+@(projects: Seq[Project])(implicit context: util.Context[_], flash: Flash, lang: Lang)
+
+@main(Messages("application.name")) {
+	
+	<table class="table table-bordered table-hover">
+		<col />
+		<col width="100px" />
+		<tr>
+			<th>@Messages("property.name")</th>
+			<th></th>
+		</tr>
+		@for(project <- projects) {
+			<tr>
+				<td>@project.name</td>
+				<td style="text-align: center"><a href="@controllers.routes.Projects.show(project)" class="btn">
+				<i class="icon-edit"></i> @Messages("command.update")</a></td>
+			</tr>
+		}
+	</table>
+	
+	<p>
+		<a href="@controllers.routes.Projects.create()" class="btn btn-primary"><i class="icon-plus"></i> 
+			@Messages("command.create")</a>
+	</p>
+}

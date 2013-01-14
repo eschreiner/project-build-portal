@@ -1,2 +1,7 @@
 application.name = Project Build Portal
 
+command.create = Add
+command.login = Log in
+command.register = Register
+
+property.name = Name

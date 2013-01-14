@@ -1,0 +1,34 @@
+@(loginForm: Form[Option[auth.core.UserAuthenticatedEvent[Stakeholder]]])(implicit context: util.Context[_], flash: Flash, lang: Lang)
+
+@import helper._
+@import helper.twitterBootstrap._
+@import tags._
+
+@main(Messages("application.name")) {
+	
+	<div class="span4 shadowed-border">
+	@loginForm.globalError.map { error =>
+		<div class="alert alert-error">@error.message</div>
+	}
+	@helper.form(action = routes.Stakeholders.authenticate(), 'id -> "loginForm") {
+		<fieldset>
+			<legend>@Messages("login.title")</legend>
+			@helper.inputText(loginForm("account"), 'class -> "autofocus", '_label -> Messages("login.account"))
+			@helper.inputPassword(loginForm("password"))
+			@helper.checkbox(loginForm("rememberMe"), '_label -> "", '_help -> Messages("login.remember.me"))
+			@submitHidden()
+		</fieldset>
+		<div class="buttons">
+		<div onclick="javascript:document.forms['loginForm'].submit();" 
+			class="btn btn-primary"><i class="icon-ok"></i> 
+			@Messages("command.login")
+		</div>
+		<a href="/" 
+			class="btn btn-warning"><i class="icon-remove"></i>
+			@Messages("command.cancel")</a>
+		</div>
+	}
+	</div>
+	<div class="span4" style="border: 1px solid #f96;">reasons for using BOOXX</div>
+
+}

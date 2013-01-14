@@ -1,0 +1,36 @@
+@(registrationForm: Form[(String,String,String,String,Boolean)])(implicit context: util.Context[_], flash: Flash, lang: Lang)
+
+@import helper._
+@import helper.twitterBootstrap._
+@import tags._
+
+@main(Messages("application.name")) {
+	
+	<div class="span4 shadowed-border">
+	@registrationForm.globalError.map { error =>
+		<div class="alert alert-error">@error.message</div>
+	}
+	@helper.form(action = routes.Stakeholders.register(), 'id -> "registrationForm") {
+		<fieldset>
+			<legend>@Messages("register.title")</legend>
+			@helper.inputText(registrationForm("account"),	'class -> "autofocus", '_label -> Messages("register.account"))
+			@helper.inputText(registrationForm("email"),	'_label -> Messages("register.email"))
+			@helper.inputPassword(registrationForm("password1"), '_label -> Messages("register.password"))
+			@helper.inputPassword(registrationForm("password2"), '_label -> Messages("register.password.repeat"))
+			@helper.checkbox(registrationForm("acceptTNC"), '_label -> "", '_help -> Messages("register.accept.TNC"))
+			@submitHidden()
+		</fieldset>
+		<p>
+		<div onclick="javascript:document.forms['registrationForm'].submit();" 
+			class="btn btn-primary"><i class="icon-ok"></i> 
+			@Messages("register.submit")
+		</div>
+		<a href="/" 
+			class="btn btn-warning"><i class="icon-remove"></i>
+			@Messages("command.cancel")</a>
+		</p>
+	}
+	</div>
+	<div class="span4" style="border: 1px solid red;">reasons for using BOOXX</div>
+
+}

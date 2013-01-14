@@ -5,6 +5,7 @@ import play.api.mvc.Request
 
 import org.squeryl.dsl.GroupWithMeasures
 
+import auth.core.AuthContext
 import models.Stakeholder
 
 /**
@@ -13,6 +14,5 @@ import models.Stakeholder
  * @since   0.1.0.0
  */
 case class Context[A](request: Request[A],
-        stats: List[GroupWithMeasures[String,Long]],
         user: Option[Stakeholder])
-extends WrappedRequest(request)
+extends WrappedRequest(request) with AuthContext[A,Stakeholder]

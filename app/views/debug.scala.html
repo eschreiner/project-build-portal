@@ -1,0 +1,13 @@
+@()(implicit lang: Lang, context: util.Context[_])
+@import play.api.Play.current
+
+@if(current.mode.toString=="Dev") {
+<div class="debug">
+	accepted = @context.request.acceptLanguages.map(_.code).mkString(", ")
+	<br/> display lang = @lang.code
+	<br/> @(new java.util.Date().format("HH:mm:ss"))
+	<br/> running in '@current.mode' mode
+	<br/> <span id="timing1"></span>
+	<br/> <span id="timing2"></span>
+</div>
+}
