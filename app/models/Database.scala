@@ -56,7 +56,7 @@ trait DbAccess[E <: DbEntity] {
         table lookup id
     }
 
-    def update(entity: E): Unit = inTransaction {
+    def updateFull(entity: E): Unit = inTransaction {
         table update entity
     }
 
@@ -72,6 +72,14 @@ trait DbNamedAccess[E <: DbNamedEntity] extends DbAccess[E] {
 
     def list(): List[E] = inTransaction {
         allQ toList
+    }
+
+    def updateName(id: Long, name: String) = inTransaction {
+        update(table)(entity =>
+            where(entity.id === id)
+            set(entity.name := name)
+        )
+//        cache(id,null)
     }
 
 }

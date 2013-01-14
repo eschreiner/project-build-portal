@@ -1,7 +1,29 @@
 application.name = Project Build Portal
 
+command.back.to.list = Back to List
+command.cancel = Cancel
 command.create = Add
-command.login = Log in
-command.register = Register
+command.login = Sign in
+command.register = Sign up
+command.update = Edit
+
+login.title = Please sign in with your credentials
+login.account = Your account name
+login.password = Your password
+login.remember.me = Remember me
+login.success = You are now signed in.
+
+logout.success = You are now signed out.
+
+project.details = Project Details
+project.details1 = Details for Project {0}
 
 property.name = Name
+
+register.title = Please fill in your registration
+register.account = Your account name
+register.email = Your email address
+register.password = Your password
+register.password.repeat = Repeat password
+register.accept.TNC = Accept Terms & Conditions
+register.error.accept.TNC = Please accept the Terms & Conditions

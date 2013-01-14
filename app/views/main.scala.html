@@ -1,4 +1,4 @@
-@(title: String)(content: Html)(implicit context: util.Context[_], flash: Flash, lang: Lang)
+@(title: String, scripts: Html = Html(""))(content: Html)(implicit context: util.Context[_], flash: Flash, lang: Lang)
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -30,9 +30,6 @@
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
 </script>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="@routes.Assets.at("javascripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
 </head>
 <body style="padding-top: 50px;">
     <div id="wrap" class="screenshot">
@@ -72,12 +69,15 @@
 </script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.editinplace.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/pbp.js")"></script>
 <script type="text/javascript">
 $().ready(function() {
 	$('#timing1').text("load time = "+timeSpent+" ms");
 	$('.alert').delay(3000).fadeTo('fast',0.4).slideUp();
 });
 </script>
+@scripts
 <script type="text/javascript">
 	var endTime = new Date().getTime();
 	var totalSpent = endTime - startTime;

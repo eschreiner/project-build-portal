@@ -1,0 +1,9 @@
+@()
+<script type="text/javascript">
+	$().ready(function() {
+		$(".edit-inplace").editInPlace({
+			callback: function(unused, enteredText) { update_title(enteredText); return enteredText; },
+			hover_class: "editable"
+		});
+	});
+</script>

@@ -9,8 +9,6 @@ case class Project(name: String, active: Boolean, owner_id: Long) extends DbName
 
 }
 
-import Database.projectTable
-
 object Project extends DbNamedAccess[Project] {
 
 	import play.api.mvc.PathBindable
@@ -27,6 +25,7 @@ object Project extends DbNamedAccess[Project] {
         }
     }
 
-  val table = projectTable
+	import Database.projectTable
+	val table = projectTable
 
 }

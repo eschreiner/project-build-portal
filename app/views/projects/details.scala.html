@@ -2,7 +2,7 @@
 
 @import tags._
 
-@main(Messages("project.details1", project.name)) {
+@main(Messages("project.details1", project.name),editing()) {
 	<h2>@Messages("project.details")</h2>
 	
 	<table class="table"><tr>
@@ -10,23 +10,12 @@
 		<img src="book.mediumimage" />
 	</td><td>
 	<dl class="dl-horizontal">
-	<dt>@Messages("book.title")</dt>
+	<dt>@Messages("property.name")</dt>
 	<dd class="edit-inplace">@project.name</dd>
 	</dl>
 	</td>
 	</tr></table>
 	
-	<table class="table table-bordered table-hover tree-table">
-		<thead>
-			<tr>
-				<th width="50px">@Messages("section.number")</th>
-				<th width="30px">@Messages("section.version")</th>
-				<th>@Messages("section.title")</th>
-				<th width="100px"></th>
-			</tr>
-		</thead>
-	</table>
-
 	<p id="messages-success" style="display: none;" class="alert alert-success"></p>
 	
 	<p>
@@ -39,9 +28,9 @@
 <script type="text/javascript">
 function update_title(newTitle) {
 	$.ajax({
-		url: " routes.Projects.updateTitle()",
+		url: "@routes.Projects.updateTitle()",
 		type: "POST",
-		data: "id=@project.id&title="+ newTitle,
+		data: "id=@project.id&name="+ newTitle,
         success: function(msg) {
             $("#messages-success").text(msg);
             $("#messages-success").fadeIn().delay(3000).fadeOut();

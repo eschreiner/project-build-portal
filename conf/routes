@@ -19,6 +19,7 @@ GET		/logout						controllers.Stakeholders.logout
 GET		/projects					controllers.Projects.list
 GET		/project/create				controllers.Projects.create
 GET		/project/:project			controllers.Projects.show(project: models.Project)
+POST	/project/title		controllers.Projects.updateTitle
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
