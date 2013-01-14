@@ -5,14 +5,14 @@ package models
  * @version 0.1.0.0
  * @since   0.1.0.0
  */
-case class Stakeholder(name: String, fullname: String, email: String) extends DbEntity {
+case class Stakeholder(name: String, fullname: String, email: String) extends DbNamedEntity {
 
 }
 
 import Database.stakeholderTable
 
-object Stakeholder extends DbAccess[Stakeholder] {
-  
+object Stakeholder extends DbNamedAccess[Stakeholder] {
+
   val table = stakeholderTable
-  
+
 }

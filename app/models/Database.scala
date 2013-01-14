@@ -32,7 +32,9 @@ trait DbEntity extends KeyedEntity[Long] {
     val id: Long = 0
 }
 
-case class DbNamedEntity(name: String) extends DbEntity
+trait DbNamedEntity extends DbEntity {
+    def name: String
+}
 
 import org.squeryl.Query
 import org.squeryl.dsl._
