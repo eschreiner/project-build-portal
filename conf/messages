@@ -22,6 +22,7 @@ product.details1 = Details for Product {0}
 project.list = List of Projects
 project.details = Project Details
 project.details1 = Details for Project {0}
+project.create = Add project...
 
 property.name = Name
 

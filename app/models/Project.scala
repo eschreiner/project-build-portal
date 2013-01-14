@@ -28,4 +28,20 @@ object Project extends DbNamedAccess[Project] {
 	import Database.projectTable
 	val table = projectTable
 
+    import org.squeryl.PrimitiveTypeMode._
+    import org.squeryl.Query
+    import org.squeryl.annotations.Column
+    import org.squeryl.dsl._
+
+    def forUserQ(userID: Long): Query[Project] = from(table) (
+        project =>
+            where(project.owner_id === userID)
+            select(project)
+            orderBy(project.name)
+    )
+
+    def listFor(user: Stakeholder): List[Project] = inTransaction {
+        forUserQ(user.id).toList
+    }
+
 }

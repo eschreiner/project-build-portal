@@ -28,10 +28,33 @@ object Projects extends Controller {
     def list() = ActionWithContext { implicit context =>
         Ok(projects.list(Project.list))
     }
+
+    import play.api.data.Form
+    import play.api.data.Forms._
+
+    private val projectAddForm = Form(
+    		"name" -> nonEmptyText
+    )
+
+    def add() = ActionWithContext { implicit context =>
+    	projectAddForm.bindFromRequest.fold(
+    	        hasErrors => {},
+    	        success = { name => {
+                	for { user <- context.user
+                	} yield {
+                	    println("creating shelf "+ name +" for "+ user.name)
+    	                Project.insert(new Project(name, true, user.id))
+    	            }
+    	        }}
+    	)
+    	Redirect(routes.Projects.list)
+    }
+
     def create() = ActionWithContext { implicit context =>
         val project = Project.insert(new Project("???", true, context.user.get.id))
         Redirect(routes.Projects.show(project))
     }
+
     def updateName() = ActionWithContext { implicit context =>
         val (id,name) = nameForm.bindFromRequest.get
         Project.updateName(id,name)

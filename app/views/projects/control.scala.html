@@ -1,0 +1,14 @@
+@(project: Project)(implicit context: util.Context[_], flash: Flash, lang: Lang)
+<div class="hidden-controls" style="float: left; width: 100%;">
+	<div class="controls" style="float: right; top: 0; right: 0; padding: 0px; z-index: 9999;">
+		<div class="controls-group">
+			<div class="btn editProject"><i class="icon-edit"></i></div>
+			<div class="btn deleteProject btn-danger"><i class="icon-trash"></i></div>
+		</div>
+	</div>
+	<div class="btn" data-project-id="project.id" style="width: 50%; text-align: left"
+		onclick="location.href='routes.Projects.listFor(shelf)'">
+		<i class="icon-align-justify"></i>
+		@project.name
+	</div>
+</div>
