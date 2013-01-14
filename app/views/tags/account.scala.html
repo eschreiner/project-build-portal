@@ -1,0 +1,19 @@
+@()(implicit context: util.Context[_], lang: Lang)
+
+<div class="userpanel">
+	<div class="userpanel-content">
+@if(context.user.isEmpty) {
+	<a href="/login"><i class="icon-off icon-white"></i>@Messages("command.login")</a>
+	@Messages("or")
+	<a href="/register">@Messages("command.register")</a>
+	
+}
+@for(account <- context.user) {
+		<div class="userpanel-gravatar"><img src="http://www.gravatar.com/avatar/@{account.gravatar}.jpg?size=25" /></div>
+		&nbsp;
+		@account.name
+		&nbsp;
+		<a href="/logout"><i class="icon-off icon-white"></i></a>
+}
+	</div>
+</div>

@@ -7,6 +7,9 @@ package models
  */
 case class Stakeholder(name: String, fullname: String, email: String) extends DbNamedEntity {
 
+  import org.apache.commons.codec.digest.DigestUtils.md5Hex
+  def gravatar(): String = md5Hex(email.toLowerCase().trim())
+
 }
 
 import Database.stakeholderTable
