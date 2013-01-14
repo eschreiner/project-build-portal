@@ -21,8 +21,8 @@ object ProductUsed extends DbAccess[ProductUsed] {
   import org.squeryl.Query
   import org.squeryl.dsl._
 
-  def use(product_id: Long, project_id: Long) = inTransaction {
-	  insert(ProductUsed(product_id,project_id))
+  def use(product: Product, project: Project) = inTransaction {
+	  insert(ProductUsed(product.id,project.id))
   }
 
 }

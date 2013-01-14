@@ -13,7 +13,7 @@ import org.squeryl.KeyedEntity
 object Database extends Schema {
 
     val productTable = table[Product]("product")
-    val productUsedTable = table[ProductUsed]("product_project")
+    val productUsedTable = table[ProductUsed]("product_used")
     val projectTable = table[Project]("project")
     val stakeholderTable = table[Stakeholder]("stakeholder")
     val tokenTable = table[Token]("token")
@@ -65,6 +65,24 @@ trait DbAccess[E <: DbEntity] {
 
     def updateFull(entity: E): Unit = inTransaction {
         table update entity
+    }
+
+    def allCQ(): Long = from(table) (
+        entity =>
+            compute(countDistinct(entity.id))
+    )
+
+    def count(): Long = inTransaction {
+        allCQ
+    }
+
+    def singleQ(): Query[E] = from(table) (
+        entity =>
+            select(entity)
+    )
+
+    def single(): Option[E] = inTransaction {
+        singleQ headOption
     }
 
 }

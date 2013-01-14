@@ -15,7 +15,7 @@ GET		/login						controllers.Stakeholders.login
 POST	/login						controllers.Stakeholders.authenticate
 GET		/logout						controllers.Stakeholders.logout
 
-# Projects
+# Products
 GET		/products					controllers.Products.list
 GET		/product/create				controllers.Products.create
 GET		/product/:product			controllers.Products.show(product: models.Product)
@@ -24,7 +24,6 @@ POST	/product/name				controllers.Products.updateName
 # Projects
 GET		/projects					controllers.Projects.list
 POST	/projects					controllers.Projects.add
-GET		/project/create				controllers.Projects.create
 GET		/project/:project			controllers.Projects.show(project: models.Project)
 POST	/project/name				controllers.Projects.updateName
 
