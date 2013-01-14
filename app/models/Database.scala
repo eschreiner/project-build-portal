@@ -32,6 +32,12 @@ trait DbEntity extends KeyedEntity[Long] {
     val id: Long = 0
 }
 
+case class DbNamedEntity(name: String) extends DbEntity
+
+import org.squeryl.Query
+import org.squeryl.dsl._
+import org.squeryl.PrimitiveTypeMode._
+
 trait DbAccess[E <: DbEntity] {
 
     val table: Table[E]
@@ -46,6 +52,20 @@ trait DbAccess[E <: DbEntity] {
 
     def update(entity: E): Unit = inTransaction {
         table update entity
+    }
+
+}
+
+trait DbNamedAccess[E <: DbNamedEntity] extends DbAccess[E] {
+
+    def allQ(): Query[E] = from(table) (
+        entity =>
+            select(entity)
+            orderBy(entity.name)
+    )
+
+    def list(): List[E] = inTransaction {
+        allQ toList
     }
 
 }
