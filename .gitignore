@@ -4,6 +4,7 @@
 # except for .gitignore
 !.gitattributes
 !.gitignore
+!.travis.yml
 
 # Ignore Play! working directory #
 bin
