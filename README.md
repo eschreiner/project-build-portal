@@ -1,4 +1,7 @@
-project-build-mailer
-====================
+Project Build Portal (PBP)
+==========================
 
-web service that receives build notification from CI services and sends out customized emails to project stakeholders
+Overview
+--------
+
+The Project Build Portal (PBP) is a web service that receives build notifications from CI services and sends out customized emails to project stakeholders.
