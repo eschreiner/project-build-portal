@@ -1,17 +1,15 @@
-@(project: Project)(implicit context: util.Context[_], flash: Flash, lang: Lang)
+@(product: Product)(implicit context: util.Context[_], flash: Flash, lang: Lang)
 
 @import tags._
 
-@main(Messages("project.details1", project.name),editing()) {
-	<h2>@Messages("project.details")</h2>
+@main(Messages("product.details1", product.name),editing()) {
+	<h2>@Messages("product.details")</h2>
 	
 	<table class="table"><tr>
 	<td>
-		<img src="book.mediumimage" />
-	</td><td>
 	<dl class="dl-horizontal">
 	<dt>@Messages("property.name")</dt>
-	<dd class="edit-inplace">@project.name</dd>
+	<dd class="edit-inplace">@product.name</dd>
 	</dl>
 	</td>
 	</tr></table>
@@ -19,16 +17,16 @@
 	<p id="messages-success" style="display: none;" class="alert alert-success"></p>
 	
 	<p>
-		<a href="@controllers.routes.Projects.list()" class="btn btn-primary"><i class="icon-backward"></i> 
+		<a href="@controllers.routes.Products.list()" class="btn btn-primary"><i class="icon-backward"></i> 
 			@Messages("command.back.to.list")</a>
 		deleteButton(controllers.routes.Books.delete(book),controllers.routes.Books.list())
 	</p>
 <script type="text/javascript">
 function update_title(newTitle) {
 	$.ajax({
-		url: "@routes.Projects.updateName()",
+		url: "@routes.Products.updateName()",
 		type: "POST",
-		data: "id=@project.id&name="+ newTitle,
+		data: "id=@product.id&name="+ newTitle,
         success: function(msg) {
             $("#messages-success").text(msg);
             $("#messages-success").fadeIn().delay(3000).fadeOut();

@@ -15,6 +15,11 @@ login.success = You are now signed in.
 
 logout.success = You are now signed out.
 
+product.list = List of Products
+product.details = Product Details
+product.details1 = Details for Product {0}
+
+project.list = List of Projects
 project.details = Project Details
 project.details1 = Details for Project {0}
 

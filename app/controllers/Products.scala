@@ -12,29 +12,29 @@ import auth.core._
  * @history
  *          5.6.1.0 # Jan 14, 2013 # created
  */
-object Projects extends Controller {
+object Products extends Controller {
 
     import ControllerHelpers._
     import models._
     import views.html._
 
-    def show(project: Project) = ActionWithContext { implicit context =>
-        Ok(projects.details(project))
+    def show(product: Product) = ActionWithContext { implicit context =>
+        Ok(products.details(product))
     }
 
     import java.text.SimpleDateFormat
     import java.util.Date
 
     def list() = ActionWithContext { implicit context =>
-        Ok(projects.list(Project.list))
+        Ok(products.list(Product.list))
     }
     def create() = ActionWithContext { implicit context =>
-        val project = Project.insert(new Project("???", true, context.user.get.id))
-        Redirect(routes.Projects.show(project))
+        val product = Product.insert(new Product("???"))
+        Redirect(routes.Products.show(product))
     }
     def updateName() = ActionWithContext { implicit context =>
         val (id,name) = nameForm.bindFromRequest.get
-        Project.updateName(id,name)
+        Product.updateName(id,name)
         Accepted("title saved at "+ new SimpleDateFormat("HH:mm:ss").format(new Date()))
     }
 
