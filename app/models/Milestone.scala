@@ -48,4 +48,11 @@ object Milestone extends DbNamedAccess[Milestone] {
     forProjectQ(project.id) toList
   }
 
+    def updateDeadline(id: Long, deadline: Date) = inTransaction {
+        update(table)(entity =>
+            where(entity.id === id)
+            set(entity.deadline := Option(deadline))
+        )
+    }
+
 }

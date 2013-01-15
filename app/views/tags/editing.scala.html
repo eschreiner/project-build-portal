@@ -5,5 +5,11 @@
 			callback: function(unused, enteredText) { update_title(enteredText); return enteredText; },
 			hover_class: "editable"
 		});
+		$(".edit-date").datepicker({
+			dateFormat: "yy-mm-dd",
+			onClose: function(dateText,control) {
+				update_date(dateText,control);
+			}
+		});
 	});
 </script>

@@ -12,6 +12,8 @@
 	<dl class="dl-horizontal">
 	<dt>@Messages("property.name")</dt>
 	<dd class="edit-inplace">@milestone.name</dd>
+	<dt>@Messages("milestone.deadline")</dt>
+	<dd><input class="edit-date" value="@milestone.deadline"></dd>
 	</dl>
 	</td>
 	</tr></table>
@@ -25,7 +27,7 @@
 	</p>
 
 	<div class="span4">
-		<h5>Milestones</h5>
+		<h5>Products and Versions</h5>
 		for(milestone <- Milestone.listFor(project)) {
 			milestones.control(milestone)
 		}
@@ -42,6 +44,17 @@ function update_title(newTitle) {
 		url: "@routes.Milestones.updateName()",
 		type: "POST",
 		data: "id=@milestone.id&name="+ newTitle,
+        success: function(msg) {
+            $("#messages-success").text(msg);
+            $("#messages-success").fadeIn().delay(3000).fadeOut();
+        }
+	});
+}
+function update_date(newDate,control) {
+	$.ajax({
+		url: "@routes.Milestones.updateDeadline()",
+		type: "POST",
+		data: "id=@milestone.id&deadline="+ newDate,
         success: function(msg) {
             $("#messages-success").text(msg);
             $("#messages-success").fadeIn().delay(3000).fadeOut();

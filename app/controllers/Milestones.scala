@@ -52,13 +52,36 @@ object Milestones extends Controller {
     	)
     }
 
-    import java.text.SimpleDateFormat
-    import java.util.Date
-
     def updateName() = ActionWithContext { implicit context =>
         val (id,name) = nameForm.bindFromRequest.get
         Milestone.updateName(id,name)
-        Accepted("title saved at "+ new SimpleDateFormat("HH:mm:ss").format(new Date()))
+        Accepted("name saved")
+    }
+
+    val deadlineForm = Form(
+            tuple(
+            		"id" -> longNumber,
+                    "deadline" -> text
+            )
+    )
+
+    import java.text.SimpleDateFormat
+
+    def updateDeadline() = ActionWithContext { implicit context =>
+        deadlineForm.bindFromRequest.fold(
+            hasErrors => {
+              Accepted("error updating deadline")
+            },
+            success = { form => {
+              form match {
+                case (id,date) => {
+                	val deadline = new SimpleDateFormat("yyyy-MM-dd").parse(date)
+                	Milestone.updateDeadline(id,deadline)
+                	Accepted("deadline saved")
+                }
+              }
+            }}
+        )
     }
 
 }
