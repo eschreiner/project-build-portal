@@ -38,9 +38,11 @@ object Projects extends Controller {
 
     def add() = ActionWithContext { implicit context =>
     	projectAddForm.bindFromRequest.fold(
-    	        hasErrors => {},
+    	        hasErrors => {
+    	        	Redirect(routes.Projects.list)
+    	        },
     	        success = { name => {
-                	for { user <- context.user
+                	val result = for { user <- context.user
                 	} yield {
                 	    println("creating project "+ name +" for "+ user.name)
     	                val project = Project.insert(new Project(name, user.id))
@@ -49,10 +51,11 @@ object Projects extends Controller {
     	                    	ProductUsed.use(product,project)
     	                    }
     	                }
+                	    Redirect(routes.Projects.show(project))
     	            }
+                	result.get
     	        }}
     	)
-    	Redirect(routes.Projects.list)
     }
 
     def updateName() = ActionWithContext { implicit context =>
