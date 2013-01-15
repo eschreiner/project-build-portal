@@ -41,8 +41,8 @@ object Milestones extends Controller {
     					val result = for { project <- Project.findBy(project_id)
     					} yield {
     						println("creating milestone "+ name +" for "+ project.name)
-    						Milestone.insert(Milestone(name, project_id))
-    						Redirect(routes.Projects.show(project))
+    						val milestone = Milestone.insert(Milestone(name, project_id))
+    						Redirect(routes.Milestones.show(milestone))
     					}
     					result.get
     				}

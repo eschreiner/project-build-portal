@@ -41,7 +41,7 @@ object Milestone extends DbNamedAccess[Milestone] {
         milestone =>
             where(milestone.project_id === projectID)
             select(milestone)
-            orderBy(milestone.name)
+            orderBy(milestone.deadline desc)
     )
 
   def listFor(project: Project) = inTransaction {
