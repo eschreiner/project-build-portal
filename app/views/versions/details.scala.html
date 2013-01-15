@@ -1,0 +1,39 @@
+@(version: Version)(implicit context: util.Context[_], flash: Flash, lang: Lang)
+
+@import tags._
+
+@main(Messages("version.details1", version.name),editing()) {
+	<h2>@Messages("version.details")</h2>
+	
+	<table class="table"><tr>
+	<td>
+	<dl class="dl-horizontal">
+	<dt>@Messages("property.name")</dt>
+	<dd class="edit-inplace">@version.name</dd>
+	</dl>
+	</td>
+	</tr></table>
+	
+	<p id="messages-success" style="display: none;" class="alert alert-success"></p>
+	
+	<p>
+		<a href="/product/@version.product_id" class="btn btn-primary"><i class="icon-backward"></i> 
+			@Messages("command.back.to.list")</a>
+		deleteButton(controllers.routes.Books.delete(book),controllers.routes.Books.list())
+	</p>
+
+<script type="text/javascript">
+function update_title(newTitle) {
+	$.ajax({
+		url: "@routes.Versions.updateName()",
+		type: "POST",
+		data: "id=@version.id&name="+ newTitle,
+        success: function(msg) {
+            $("#messages-success").text(msg);
+            $("#messages-success").fadeIn().delay(3000).fadeOut();
+        }
+	});
+}
+</script>
+
+}

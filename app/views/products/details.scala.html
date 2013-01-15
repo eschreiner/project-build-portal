@@ -21,6 +21,19 @@
 			@Messages("command.back.to.list")</a>
 		deleteButton(controllers.routes.Books.delete(book),controllers.routes.Books.list())
 	</p>
+	
+	<div class="span3">
+		<h5>Versions</h5>
+		@for(version <- Version.listFor(product)) {
+			versions.control(version)
+		}
+		@helper.form(action = routes.Versions.add(), 'style -> "margin: 0px;") {
+			<input name="product_id" type="hidden" value="@product.id">
+			<input name="name" style="width: 80%; margin-top: 6px;" placeholder="@Messages("version.create")">
+			@submitHidden()
+		}
+	</div>
+	
 <script type="text/javascript">
 function update_title(newTitle) {
 	$.ajax({
