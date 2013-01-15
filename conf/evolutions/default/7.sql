@@ -5,7 +5,7 @@ CREATE TABLE product_used
   id bigint not null,
   product_id bigint NOT NULL,
   project_id bigint NOT NULL,
-  CONSTRAINT book_rating_pkey PRIMARY KEY (id),
+  CONSTRAINT product_used_pkey PRIMARY KEY (id),
   CONSTRAINT fk_product_used_product FOREIGN KEY (product_id)
       REFERENCES product (id)
       ON UPDATE NO ACTION ON DELETE CASCADE,

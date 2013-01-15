@@ -15,6 +15,8 @@ object Database extends Schema {
     val productTable = table[Product]("product")
     val productUsedTable = table[ProductUsed]("product_used")
     val projectTable = table[Project]("project")
+    val milestoneTable = table[Milestone]("milestone")
+    val versionTable = table[Version]("version")
     val stakeholderTable = table[Stakeholder]("stakeholder")
     val tokenTable = table[Token]("token")
 
@@ -28,6 +30,12 @@ object Database extends Schema {
         e.id is(autoIncremented)
     )}
     on(projectTable) { e => declare (
+        e.id is(autoIncremented)
+    )}
+    on(milestoneTable) { e => declare (
+        e.id is(autoIncremented)
+    )}
+    on(versionTable) { e => declare (
         e.id is(autoIncremented)
     )}
     on(stakeholderTable) { e => declare (
