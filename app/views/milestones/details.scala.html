@@ -26,9 +26,11 @@
 
 	<div class="span4">
 		<h5>Products and Versions</h5>
-		@defining(Project.findBy(milestone.project_id)){ project =>
-			@for(product <- project.get.productList()) {
-				@products.control(product)
+		@defining(Project.findBy(milestone.project_id)){ projectOption =>
+			@for(project <- projectOption) {
+				@for(product <- project.productList()) {
+					@products.control(product)
+				}
 			}
 		}
 	</div>
