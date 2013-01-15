@@ -46,4 +46,11 @@ object Version extends DbNamedAccess[Version] {
     forProductQ(product.id) toList
   }
 
+    def updateTag(id: Long, tag: String) = inTransaction {
+        update(table)(entity =>
+            where(entity.id === id)
+            set(entity.tag := tag)
+        )
+    }
+
 }

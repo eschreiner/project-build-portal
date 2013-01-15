@@ -10,6 +10,8 @@
 	<dl class="dl-horizontal">
 	<dt>@Messages("property.name")</dt>
 	<dd class="edit-inplace">@version.name</dd>
+	<dt>@Messages("version.tag")</dt>
+	<dd class="edit-version">@version.tag</dd>
 	</dl>
 	</td>
 	</tr></table>
@@ -28,6 +30,17 @@ function update_title(newTitle) {
 		url: "@routes.Versions.updateName()",
 		type: "POST",
 		data: "id=@version.id&name="+ newTitle,
+        success: function(msg) {
+            $("#messages-success").text(msg);
+            $("#messages-success").fadeIn().delay(3000).fadeOut();
+        }
+	});
+}
+function update_version(newTag) {
+	$.ajax({
+		url: "@routes.Versions.updateTag()",
+		type: "POST",
+		data: "id=@version.id&tag="+ newTag,
         success: function(msg) {
             $("#messages-success").text(msg);
             $("#messages-success").fadeIn().delay(3000).fadeOut();

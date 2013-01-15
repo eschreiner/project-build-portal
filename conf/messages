@@ -29,6 +29,11 @@ milestone.details = Milestone Details
 milestone.details1 = Details for Milestone {0}
 milestone.create = Add milestone...
 
+version.details = Version Details
+version.details1 = Details for Version {0}
+version.create = Add version...
+version.tag = Tag
+
 property.name = Name
 
 register.title = Please fill in your registration

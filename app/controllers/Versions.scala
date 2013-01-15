@@ -58,30 +58,27 @@ object Versions extends Controller {
         Accepted("name saved")
     }
 
-//    val deadlineForm = Form(
-//            tuple(
-//            		"id" -> longNumber,
-//                    "deadline" -> text
-//            )
-//    )
-//
-//    import java.text.SimpleDateFormat
-//
-//    def updateDeadline() = ActionWithContext { implicit context =>
-//        deadlineForm.bindFromRequest.fold(
-//            hasErrors => {
-//              Accepted("error updating deadline")
-//            },
-//            success = { form => {
-//              form match {
-//                case (id,date) => {
-//                	val deadline = new SimpleDateFormat("yyyy-MM-dd").parse(date)
-//                	Milestone.updateDeadline(id,deadline)
-//                	Accepted("deadline saved")
-//                }
-//              }
-//            }}
-//        )
-//    }
+    val tagForm = Form(
+            tuple(
+            		"id" -> longNumber,
+                    "tag" -> text
+            )
+    )
+
+    def updateTag() = ActionWithContext { implicit context =>
+        tagForm.bindFromRequest.fold(
+            hasErrors => {
+              Accepted("error updating tag")
+            },
+            success = { form => {
+              form match {
+                case (id,tag) => {
+                	Version.updateTag(id,tag)
+                	Accepted("tag saved")
+                }
+              }
+            }}
+        )
+    }
 
 }
