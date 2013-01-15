@@ -43,7 +43,7 @@ object Projects extends Controller {
                 	for { user <- context.user
                 	} yield {
                 	    println("creating project "+ name +" for "+ user.name)
-    	                val project = Project.insert(new Project(name, true, user.id))
+    	                val project = Project.insert(new Project(name, user.id))
     	                if (Product.count() == 1) {
     	                    for (product <- Product.single()) {
     	                    	ProductUsed.use(product,project)

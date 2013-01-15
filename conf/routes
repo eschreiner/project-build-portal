@@ -27,5 +27,8 @@ POST	/projects					controllers.Projects.add
 GET		/project/:project			controllers.Projects.show(project: models.Project)
 POST	/project/name				controllers.Projects.updateName
 
+# Milestones
+POST	/milestones					controllers.Milestones.add
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

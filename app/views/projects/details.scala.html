@@ -23,6 +23,19 @@
 			@Messages("command.back.to.list")</a>
 		deleteButton(controllers.routes.Books.delete(book),controllers.routes.Books.list())
 	</p>
+
+	<div class="span4">
+		<h5>Milestones</h5>
+		@for(milestone <- Milestone.listFor(project)) {
+			@milestones.control(milestone)
+		}
+		@helper.form(action = routes.Milestones.add(), 'style -> "margin: 0px;") {
+			<input name="project_id" type="hidden" value="@project.id">
+			<input name="name" style="width: 80%; margin-top: 6px;" placeholder="@Messages("milestone.create")">
+			@submitHidden()
+		}
+	</div>
+	
 <script type="text/javascript">
 function update_title(newTitle) {
 	$.ajax({

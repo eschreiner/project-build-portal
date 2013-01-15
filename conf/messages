@@ -24,6 +24,8 @@ project.details = Project Details
 project.details1 = Details for Project {0}
 project.create = Add project...
 
+milestone.create = Add milestone...
+
 property.name = Name
 
 register.title = Please fill in your registration

@@ -3,7 +3,7 @@
 CREATE TABLE project (
 	id bigint not null,
 	name text,
-	active boolean,
+	dormant boolean,
 	CONSTRAINT project_pkey PRIMARY KEY (id)
 );
 CREATE SEQUENCE s_project_id;

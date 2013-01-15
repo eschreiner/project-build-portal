@@ -14,7 +14,7 @@
 		@for(project <- projects) {
 			<tr>
 				<td>@project.name</td>
-				<td style="text-align: center"><a href="@controllers.routes.Projects.show(project)" class="btn">
+				<td style="text-align: center"><a href="@routes.Projects.show(project)" class="btn">
 				<i class="icon-edit"></i> @Messages("command.update")</a></td>
 			</tr>
 		}
