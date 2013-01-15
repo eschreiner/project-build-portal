@@ -1,12 +1,18 @@
 package models
 
+import org.squeryl.PrimitiveTypeMode._
+
 /**
  * @author  Dr. Erich W. Schreiner - Software Design &amp; Consulting GmbH
  * @version 0.1.0.0
  * @since   0.1.0.0
  */
 case class Project(name: String, owner_id: Long, dormant: Boolean = false) extends DbNamedEntity {
-
+    import models.Database.productUsedTable
+    lazy val products = productUsedTable.left(this)
+    def productList(): Seq[Product] = inTransaction {
+        products.toList
+    }
 }
 
 object Project extends DbNamedAccess[Project] {

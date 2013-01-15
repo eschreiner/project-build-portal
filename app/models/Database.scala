@@ -13,17 +13,15 @@ import org.squeryl.KeyedEntity
 object Database extends Schema {
 
     val productTable = table[Product]("product")
-    val productUsedTable = table[ProductUsed]("product_used")
     val projectTable = table[Project]("project")
+    val productUsedTable = manyToManyRelation(projectTable,productTable,"product_used").
+    		via[ProductUsed]((proj,prod,used) => (used.project_id === proj.id, used.product_id === prod.id))
     val milestoneTable = table[Milestone]("milestone")
     val versionTable = table[Version]("version")
     val stakeholderTable = table[Stakeholder]("stakeholder")
     val tokenTable = table[Token]("token")
 
     on(productTable) { e => declare (
-        e.id is(autoIncremented)
-    )}
-    on(productUsedTable) { e => declare (
         e.id is(autoIncremented)
     )}
     on(productTable) { e => declare (
@@ -59,7 +57,7 @@ import org.squeryl.Query
 import org.squeryl.dsl._
 import org.squeryl.PrimitiveTypeMode._
 
-trait DbAccess[E <: DbEntity] {
+trait DbBase[ID,E <: KeyedEntity[ID]] {
 
     val table: Table[E]
 
@@ -67,21 +65,8 @@ trait DbAccess[E <: DbEntity] {
     	table insert entity
     }
 
-    def findBy(id: Long): Option[E] = inTransaction {
-        table lookup id
-    }
-
     def updateFull(entity: E): Unit = inTransaction {
         table update entity
-    }
-
-    def allCQ(): Long = from(table) (
-        entity =>
-            compute(countDistinct(entity.id))
-    )
-
-    def count(): Long = inTransaction {
-        allCQ
     }
 
     def singleQ(): Query[E] = from(table) (
@@ -91,6 +76,23 @@ trait DbAccess[E <: DbEntity] {
 
     def single(): Option[E] = inTransaction {
         singleQ headOption
+    }
+
+}
+
+trait DbAccess[E <: DbEntity] extends DbBase[Long,E] {
+
+    def findBy(id: Long): Option[E] = inTransaction {
+        table lookup id
+    }
+
+    def allCQ(): Long = from(table) (
+        entity =>
+            compute(countDistinct(entity.id))
+    )
+
+    def count(): Long = inTransaction {
+        allCQ
     }
 
 }

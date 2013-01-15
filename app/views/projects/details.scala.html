@@ -36,6 +36,13 @@
 		}
 	</div>
 	
+	<div class="span4">
+		<h5>Products</h5>
+		@for(product <- project.productList()) {
+			@product.name <br/>
+		}
+	</div>
+	
 <script type="text/javascript">
 function update_title(newTitle) {
 	$.ajax({
