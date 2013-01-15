@@ -13,7 +13,21 @@ case class Milestone(name: String, project_id: Long, deadline: Option[Date] = No
 
 }
 
-object Milestone extends DbAccess[Milestone] {
+object Milestone extends DbNamedAccess[Milestone] {
+
+	import play.api.mvc.PathBindable
+
+    implicit def pathBinder(implicit bindableLong: PathBindable[Long]) = new PathBindable[Milestone]() {
+        override def bind(key: String, value: String): Either[String,Milestone] = {
+            for {
+                id <- bindableLong.bind(key,value).right
+                milestone <- Milestone.findBy(id).toRight("Milestone not found").right
+            } yield milestone
+        }
+        override def unbind(key: String, milestone: Milestone): String = {
+            bindableLong.unbind(key, milestone.id)
+        }
+    }
 
   import Database.milestoneTable
   val table = milestoneTable

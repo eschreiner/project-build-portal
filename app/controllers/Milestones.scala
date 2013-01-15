@@ -16,6 +16,10 @@ object Milestones extends Controller {
     import models._
     import views.html._
 
+    def show(milestone: Milestone) = ActionWithContext { implicit context =>
+        Ok(milestones.details(milestone))
+    }
+
     import play.api.data.Form
     import play.api.data.Forms._
 
@@ -46,6 +50,15 @@ object Milestones extends Controller {
     			}
     			}
     	)
+    }
+
+    import java.text.SimpleDateFormat
+    import java.util.Date
+
+    def updateName() = ActionWithContext { implicit context =>
+        val (id,name) = nameForm.bindFromRequest.get
+        Milestone.updateName(id,name)
+        Accepted("title saved at "+ new SimpleDateFormat("HH:mm:ss").format(new Date()))
     }
 
 }

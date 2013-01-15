@@ -1,0 +1,53 @@
+@(milestone: Milestone)(implicit context: util.Context[_], flash: Flash, lang: Lang)
+
+@import tags._
+
+@main(Messages("milestone.details1", milestone.name),editing()) {
+	<h2>@Messages("milestone.details")</h2>
+	
+	<table class="table"><tr>
+	<td>
+		<img src="book.mediumimage" />
+	</td><td>
+	<dl class="dl-horizontal">
+	<dt>@Messages("property.name")</dt>
+	<dd class="edit-inplace">@milestone.name</dd>
+	</dl>
+	</td>
+	</tr></table>
+	
+	<p id="messages-success" style="display: none;" class="alert alert-success"></p>
+	
+	<p>
+		<a href="/project/@milestone.project_id" class="btn btn-primary"><i class="icon-backward"></i> 
+			@Messages("command.back.to.list")</a>
+		deleteButton(controllers.routes.Books.delete(book),controllers.routes.Books.list())
+	</p>
+
+	<div class="span4">
+		<h5>Milestones</h5>
+		for(milestone <- Milestone.listFor(project)) {
+			milestones.control(milestone)
+		}
+		helper.form(action = routes.Milestones.add(), 'style -> "margin: 0px;") {
+			<input name="project_id" type="hidden" value="project.id">
+			<input name="name" style="width: 80%; margin-top: 6px;" placeholder="@Messages("milestone.create")">
+			@submitHidden()
+		}
+	</div>
+	
+<script type="text/javascript">
+function update_title(newTitle) {
+	$.ajax({
+		url: "@routes.Milestones.updateName()",
+		type: "POST",
+		data: "id=@milestone.id&name="+ newTitle,
+        success: function(msg) {
+            $("#messages-success").text(msg);
+            $("#messages-success").fadeIn().delay(3000).fadeOut();
+        }
+	});
+}
+</script>
+
+}
