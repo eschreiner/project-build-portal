@@ -22,7 +22,7 @@
 		deleteButton(controllers.routes.Books.delete(book),controllers.routes.Books.list())
 	</p>
 
-	<div class="span3">
+	<div class="span4">
 		<h5>Milestones</h5>
 		@for(milestone <- Milestone.listFor(project)) {
 			@milestones.control(milestone)
@@ -34,7 +34,7 @@
 		}
 	</div>
 	
-	<div class="span3">
+	<div class="span4">
 		<h5>Products</h5>
 		@for(product <- project.productList()) {
 			@product.name <br/>
