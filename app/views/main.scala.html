@@ -39,11 +39,9 @@
     	<div id="main" class="container-fluid clear-top"><div class="row-fluid">
     		<div class="span2"> @if(!context.user.isEmpty) {
 	    		<h5>Your Projects</h5>
-	    		@for(user <- context.user) {
-	    			@for(project <- Project.listFor(user)) {
-	    				@projects.control(project)
-	    			}
-	    		}
+	    		<div id="projectList">
+	    			@projects.listInline()
+	    		</div>
 			    @helper.form(action = routes.Projects.add(), 'style -> "margin: 0px;") {
     				<input name="name" style="width: 80%; margin-top: 6px;" placeholder="@Messages("project.create")">
     				@submitHidden()

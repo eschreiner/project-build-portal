@@ -61,4 +61,8 @@ object Projects extends Controller {
         Accepted("title saved")
     }
 
+    def listInline() = ActionWithContext { implicit context =>
+        Ok(projects.listInline())
+    }
+
 }

@@ -1,7 +1,17 @@
 @(project: Project)(implicit context: util.Context[_], flash: Flash, lang: Lang)
 <div class="hidden-controls" style="float: left; width: 100%;">
-	<div class="btn" data-project-id="project.id" style="width: 70%; text-align: left"
+	<div class="btn" data-project-id="project.id" style="width: 70%; text-align: left;"
 		onclick="location.href='@routes.Projects.show(project)'">
-		<b>@project.name</b><br/>[current milestone]
+		<b>@project.name</b><br/> <div style="font-size: 70%; line-height: 11px ! important; text-shadow: none">
+		@project.milestone_id.map { milestone_id =>
+			@Milestone.findBy(milestone_id).map { milestone =>
+				@milestone.name <br/> due @milestone.deadline.getOrElse("some time")
+			}.getOrElse {
+				[milestone not found]
+			}
+		}.getOrElse {
+			[no milestone]
+		}
+		</div>
 	</div>
 </div>

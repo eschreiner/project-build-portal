@@ -1,0 +1,7 @@
+@()(implicit context: util.Context[_], flash: Flash, lang: Lang)
+
+@for(user <- context.user) {
+	@for(project <- Project.listFor(user)) {
+		@projects.control(project)
+	}
+}

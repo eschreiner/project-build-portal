@@ -16,9 +16,9 @@
 	<div class="row-fluid">
 		<div class="span4">
 			<h5>Milestones</h5>
-			@for(milestone <- Milestone.listFor(project)) {
-				@milestones.control(milestone)
-			}
+			<div id="milestoneList">
+				@milestones.listInline(project)
+			</div>
 			@helper.form(action = routes.Milestones.add(), 'style -> "margin: 0px;") {
 				<input name="project_id" type="hidden" value="@project.id">
 				<input name="name" style="width: 80%; margin-top: 6px;" placeholder="@Messages("milestone.create")">
@@ -50,8 +50,8 @@ function update_title(newTitle) {
 		type: "POST",
 		data: "id=@project.id&name="+ newTitle,
         success: function(msg) {
-            $("#messages-success").text(msg);
-            $("#messages-success").fadeIn().delay(3000).fadeOut();
+            reportSuccess(msg);
+            $("#projectList").load('/projectList');
         }
 	});
 }

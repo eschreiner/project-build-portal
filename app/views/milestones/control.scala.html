@@ -5,8 +5,18 @@
 			<div class="btn activateMilestone btn-success"><i class="icon-play"></i></div>
 		</div>
 	</div>
-	<div class="btn" data-milestone-id="milestone.id" style="width: 70%; text-align: left"
+	<div class="btn
+			@defining(Project.findBy(milestone.project_id)){ projectOption =>
+				@for(project <- projectOption) {
+					@for(milestone_id <- project.milestone_id) {
+						@if(milestone_id == milestone.id) {
+							btn-success
+						}
+					}
+				}
+			}
+	" data-project-id="@milestone.project_id" data-milestone-id="@milestone.id" style="width: 70%; text-align: left"
 		onclick="location.href='@routes.Milestones.show(milestone)'">
-		<b>@milestone.name</b><br/> due @milestone.deadline
+		<b>@milestone.name</b><br/> due @milestone.deadline.getOrElse("some time")
 	</div>
 </div>

@@ -7,7 +7,7 @@ import org.squeryl.PrimitiveTypeMode._
  * @version 0.1.0.0
  * @since   0.1.0.0
  */
-case class Project(name: String, owner_id: Long, dormant: Boolean = false) extends DbNamedEntity {
+case class Project(name: String, owner_id: Long, dormant: Boolean = false, milestone_id: Option[Long] = None) extends DbNamedEntity {
     import models.Database.productUsedTable
     lazy val products = productUsedTable.left(this)
     def productList(): Seq[Product] = inTransaction {
@@ -48,6 +48,13 @@ object Project extends DbNamedAccess[Project] {
 
     def listFor(user: Stakeholder): List[Project] = inTransaction {
         forUserQ(user.id).toList
+    }
+
+    def activate(milestone: Milestone) = inTransaction {
+        update(table)(entity =>
+            where(entity.id === milestone.project_id)
+            set(entity.milestone_id := Option(milestone.id))
+        )
     }
 
 }

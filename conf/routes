@@ -23,15 +23,18 @@ POST	/product/name				controllers.Products.updateName
 
 # Projects
 GET		/projects					controllers.Projects.list
+GET		/projectList				controllers.Projects.listInline
 POST	/projects					controllers.Projects.add
 GET		/project/:project			controllers.Projects.show(project: models.Project)
 POST	/project/name				controllers.Projects.updateName
 
 # Milestones
+GET		/milestoneList/:project		controllers.Milestones.listInline(project: models.Project)
 POST	/milestones					controllers.Milestones.add
 GET		/milestone/:milestone		controllers.Milestones.show(milestone: models.Milestone)
 POST	/milestone/name				controllers.Milestones.updateName
 POST	/milestone/deadline			controllers.Milestones.updateDeadline
+POST	/milestone/activate/:milestone	controllers.Milestones.activate(milestone: models.Milestone)
 
 # Versions
 POST	/versions					controllers.Versions.add

@@ -45,10 +45,7 @@ function update_title(newTitle) {
 		url: "@routes.Milestones.updateName()",
 		type: "POST",
 		data: "id=@milestone.id&name="+ newTitle,
-        success: function(msg) {
-            $("#messages-success").text(msg);
-            $("#messages-success").fadeIn().delay(3000).fadeOut();
-        }
+        success: reportSuccess
 	});
 }
 function update_date(newDate,control) {
@@ -56,10 +53,7 @@ function update_date(newDate,control) {
 		url: "@routes.Milestones.updateDeadline()",
 		type: "POST",
 		data: "id=@milestone.id&deadline="+ newDate,
-        success: function(msg) {
-            $("#messages-success").text(msg);
-            $("#messages-success").fadeIn().delay(3000).fadeOut();
-        }
+        success: reportSuccess
 	});
 }
 </script>

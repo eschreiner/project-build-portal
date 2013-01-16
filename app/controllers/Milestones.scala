@@ -70,7 +70,7 @@ object Milestones extends Controller {
     def updateDeadline() = ActionWithContext { implicit context =>
         deadlineForm.bindFromRequest.fold(
             hasErrors => {
-              Accepted("error updating deadline")
+              BadRequest("error updating deadline")
             },
             success = { form => {
               form match {
@@ -82,6 +82,16 @@ object Milestones extends Controller {
               }
             }}
         )
+    }
+
+    def activate(milestone: Milestone) = ActionWithContext { implicit context =>
+    	println("activating milestone")
+    	Project.activate(milestone)
+    	Accepted("milestone activated")
+    }
+
+    def listInline(project: Project) = ActionWithContext { implicit context =>
+        Ok(milestones.listInline(project))
     }
 
 }
