@@ -22,9 +22,6 @@ object Projects extends Controller {
         Ok(projects.details(project))
     }
 
-    import java.text.SimpleDateFormat
-    import java.util.Date
-
     def list() = ActionWithContext { implicit context =>
         Ok(projects.list(Project.list))
     }
@@ -61,7 +58,7 @@ object Projects extends Controller {
     def updateName() = ActionWithContext { implicit context =>
         val (id,name) = nameForm.bindFromRequest.get
         Project.updateName(id,name)
-        Accepted("title saved at "+ new SimpleDateFormat("HH:mm:ss").format(new Date()))
+        Accepted("title saved")
     }
 
 }

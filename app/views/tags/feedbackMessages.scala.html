@@ -1,0 +1,13 @@
+@()(implicit context: util.Context[_], flash: Flash, lang: Lang)
+
+	@if(flash.get("success").isDefined) {
+		<div class="message-fade alert alert-success">
+			@flash.get("success")
+		</div>
+	}
+	@if(flash.get("error").isDefined) {
+		<div class="message-fade alert alert-error">
+			@flash.get("error")
+		</div>
+	}
+	<p id="messages-success" style="display: none;" class="alert alert-success"></p>

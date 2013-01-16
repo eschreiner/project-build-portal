@@ -8,33 +8,37 @@
 	<table class="table"><tr>
 	<td>
 	<dl class="dl-horizontal">
-	<dt>@Messages("property.name")</dt>
-	<dd class="edit-inplace">@milestone.name</dd>
+		@editableName(milestone.name)
 	<dt>@Messages("milestone.deadline")</dt>
 	<dd><input class="edit-date" value="@milestone.deadline"></dd>
 	</dl>
 	</td>
 	</tr></table>
-	
-	<p id="messages-success" style="display: none;" class="alert alert-success"></p>
-	
-	<p>
-		<a href="/project/@milestone.project_id" class="btn btn-primary"><i class="icon-backward"></i> 
-			@Messages("command.back.to.list")</a>
-		deleteButton(controllers.routes.Books.delete(book),controllers.routes.Books.list())
-	</p>
 
-	<div class="span4">
-		<h5>Products and Versions</h5>
-		@defining(Project.findBy(milestone.project_id)){ projectOption =>
-			@for(project <- projectOption) {
-				@for(product <- project.productList()) {
-					@products.control(product)
+	<div class="row-fluid">	
+		<div class="span4">
+			<h5>Products and Versions</h5>
+			@defining(Project.findBy(milestone.project_id)){ projectOption =>
+				@for(project <- projectOption) {
+					@for(product <- project.productList()) {
+						@products.control(product)
+					}
 				}
 			}
-		}
+		</div>
+		<div class="span4">
+		</div>
+		<div class="span4">
+			@feedbackMessages()
+		</div>
 	</div>
 	
+	<p class="actions">
+		<a href="/project/@milestone.project_id" class="btn btn-primary"><i class="icon-backward"></i> 
+			@Messages("command.back.to.list")</a>
+		@* deleteButton(controllers.routes.Books.delete(book),controllers.routes.Books.list()) *@
+	</p>
+
 <script type="text/javascript">
 function update_title(newTitle) {
 	$.ajax({

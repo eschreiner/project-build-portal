@@ -8,20 +8,26 @@
 	<table class="table"><tr>
 	<td>
 	<dl class="dl-horizontal">
-	<dt>@Messages("property.name")</dt>
-	<dd class="edit-inplace">@version.name</dd>
-	<dt>@Messages("version.tag")</dt>
-	<dd class="edit-version">@version.tag</dd>
+		@editableName(version.name)
+		@editableField(Messages("version.tag"),version.tag,"edit-version")
 	</dl>
 	</td>
 	</tr></table>
 	
-	<p id="messages-success" style="display: none;" class="alert alert-success"></p>
+	<div class="row-fluid">	
+		<div class="span4">
+		</div>
+		<div class="span4">
+		</div>
+		<div class="span4">
+			@feedbackMessages()
+		</div>
+	</div>
 	
-	<p>
+	<p class="actions">
 		<a href="/product/@version.product_id" class="btn btn-primary"><i class="icon-backward"></i> 
 			@Messages("command.back.to.list")</a>
-		deleteButton(controllers.routes.Books.delete(book),controllers.routes.Books.list())
+		@* deleteButton(controllers.routes.Books.delete(book),controllers.routes.Books.list()) *@
 	</p>
 
 <script type="text/javascript">

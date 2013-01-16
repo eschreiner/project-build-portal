@@ -51,19 +51,8 @@
     		}
     		</div>
     		<div class="span8">
-    		@if(flash.get("success").isDefined) {
-    			<div class="alert alert-success">
-    				@flash.get("success")
-    			</div>
-    		}
-    		@if(flash.get("error").isDefined) {
-    			<div class="alert alert-error">
-    				@flash.get("error")
-    			</div>
-    		}
-        @content
-        	
-        	@debug()
+		        @content
+        		@debug()
     		</div>
     		<div class="span2">
     			<p style="margin-top: 150px;"></p>
@@ -83,7 +72,7 @@
 <script type="text/javascript">
 $().ready(function() {
 	$('#timing1').text("load time = "+timeSpent+" ms");
-	$('.alert').delay(3000).fadeTo('fast',0.4).slideUp();
+	$('.message-fade').delay(3000).fadeTo('fast',0.4).slideUp();
 });
 </script>
 @scripts

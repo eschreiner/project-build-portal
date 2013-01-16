@@ -8,39 +8,41 @@
 	<table class="table"><tr>
 	<td>
 	<dl class="dl-horizontal">
-	<dt>@Messages("property.name")</dt>
-	<dd class="edit-inplace">@project.name</dd>
+		@editableName(project.name)
 	</dl>
 	</td>
 	</tr></table>
 	
-	<p id="messages-success" style="display: none;" class="alert alert-success"></p>
+	<div class="row-fluid">
+		<div class="span4">
+			<h5>Milestones</h5>
+			@for(milestone <- Milestone.listFor(project)) {
+				@milestones.control(milestone)
+			}
+			@helper.form(action = routes.Milestones.add(), 'style -> "margin: 0px;") {
+				<input name="project_id" type="hidden" value="@project.id">
+				<input name="name" style="width: 80%; margin-top: 6px;" placeholder="@Messages("milestone.create")">
+				@submitHidden()
+			}
+		</div>
+		
+		<div class="span4">
+			<h5>Products</h5>
+			@for(product <- project.productList()) {
+				@product.name <br/>
+			}
+		</div>
+		<div class="span4">
+			@feedbackMessages()
+		</div>
+	</div>
 	
-	<p>
+	<p class="actions">
 		<a href="@controllers.routes.Projects.list()" class="btn btn-primary"><i class="icon-backward"></i> 
 			@Messages("command.back.to.list")</a>
-		deleteButton(controllers.routes.Books.delete(book),controllers.routes.Books.list())
+		@* deleteButton(controllers.routes.Books.delete(book),controllers.routes.Books.list()) *@
 	</p>
 
-	<div class="span4">
-		<h5>Milestones</h5>
-		@for(milestone <- Milestone.listFor(project)) {
-			@milestones.control(milestone)
-		}
-		@helper.form(action = routes.Milestones.add(), 'style -> "margin: 0px;") {
-			<input name="project_id" type="hidden" value="@project.id">
-			<input name="name" style="width: 80%; margin-top: 6px;" placeholder="@Messages("milestone.create")">
-			@submitHidden()
-		}
-	</div>
-	
-	<div class="span4">
-		<h5>Products</h5>
-		@for(product <- project.productList()) {
-			@product.name <br/>
-		}
-	</div>
-	
 <script type="text/javascript">
 function update_title(newTitle) {
 	$.ajax({

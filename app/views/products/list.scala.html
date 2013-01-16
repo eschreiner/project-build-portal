@@ -1,5 +1,7 @@
 @(products: Seq[Product])(implicit context: util.Context[_], flash: Flash, lang: Lang)
 
+@import tags._
+
 @main(Messages("application.name")) {
 	
 	<h2>@Messages("product.list")</h2>
@@ -20,8 +22,11 @@
 		}
 	</table>
 	
-	<p>
-		<a href="@controllers.routes.Products.create()" class="btn btn-primary"><i class="icon-plus"></i> 
-			@Messages("command.create")</a>
-	</p>
+	<div class="span4">
+		@helper.form(action = routes.Products.add(), 'style -> "margin: 0px;") {
+			<input name="name" style="width: 80%; margin-top: 6px;" placeholder="@Messages("product.create")">
+			@submitHidden()
+		}
+	</div>
+
 }

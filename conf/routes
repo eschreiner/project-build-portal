@@ -17,7 +17,7 @@ GET		/logout						controllers.Stakeholders.logout
 
 # Products
 GET		/products					controllers.Products.list
-GET		/product/create				controllers.Products.create
+POST	/products					controllers.Products.add
 GET		/product/:product			controllers.Products.show(product: models.Product)
 POST	/product/name				controllers.Products.updateName
 
