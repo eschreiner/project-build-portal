@@ -23,7 +23,7 @@ function activateMilestone(event) {
 		success: function(msg) {
 			caption.addClass('btn-success');
 			reportSuccess(msg);
-			$('#projectList').load('/projectList');
+			reloadProject(caption.attr('data-project-id'));
 			$('#milestoneList').load('/milestoneList/'+caption.attr('data-project-id'), function() {
 				$('.hidden-controls').hover(handleHiddenControls);
 				$('.activateMilestone').click(activateMilestone);
@@ -41,4 +41,13 @@ function reportSuccess(msg) {
 function reportError(button,msg,textStatus,errorThrown) {
 	button.addClass('btn-warning');
 	$("#messages-error").text(textStatus+" - "+errorThrown).fadeIn().delay(3000).fadeOut();
+};
+
+function reloadProject(projectID) {
+	$("#project"+projectID).load('/projectInline/'+projectID, function() {
+		var button = $("#project"+projectID).find(".btn"); 
+		button.addClass("btn-updated").delay(1000).fadeIn(100,function() {
+			$(this).removeClass("btn-updated");
+		});
+	});
 };
