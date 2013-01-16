@@ -22,7 +22,7 @@ object AuthActionHandler extends ActionHandler[String, Stakeholder] {
   lazy val sessionStore = AuthSessionStore
 
   lazy val contextConverter = new ContextConverter[Stakeholder] {
-    def apply[A](request: Request[A], user: Option[Stakeholder]) = util.Context[A](request,user)
+    def apply[A](request: Request[A], user: Option[Stakeholder]) = util.Context[A](request,user,None)
   }
 
   lazy val userIdConverter = new UserIdConverter[String] {

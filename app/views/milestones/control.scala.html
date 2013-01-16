@@ -1,4 +1,4 @@
-@(milestone: Milestone)(implicit context: util.Context[_], flash: Flash, lang: Lang)
+@(project: Project,milestone: Milestone)(implicit context: util.Context[_], flash: Flash, lang: Lang)
 <div class="hidden-controls" style="float: left; width: 100%;">
 	<div class="controls" style="float: right; top: 0; right: 0; padding: 0px; z-index: 9999;">
 		<div class="controls-group">
@@ -6,15 +6,11 @@
 		</div>
 	</div>
 	<div class="btn
-			@defining(Project.findBy(milestone.project_id)){ projectOption =>
-				@for(project <- projectOption) {
-					@for(milestone_id <- project.milestone_id) {
-						@if(milestone_id == milestone.id) {
-							btn-success
-						}
-					}
-				}
+		@for(milestone_id <- project.milestone_id) {
+			@if(milestone_id == milestone.id) {
+				btn-success
 			}
+		}
 	" data-project-id="@milestone.project_id" data-milestone-id="@milestone.id" style="width: 70%; text-align: left"
 		onclick="location.href='@routes.Milestones.show(milestone)'">
 		<b>@milestone.name</b><br/> due @milestone.deadline.getOrElse("some time")

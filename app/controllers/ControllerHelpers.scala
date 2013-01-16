@@ -13,13 +13,14 @@ object ControllerHelpers {
 
     import play.api.http.HeaderNames._
 
-    import models.Stakeholder
+    import models._
 
     def ActionWithContext(f: Context[AnyContent] => PlainResult) = {
         Action { request =>
             val cookie = request.session.get("session")
             val account = Stakeholder.recoverFrom(cookie,request.remoteAddress)
-            val result = f(Context(request,account))
+            val project = Project.recoverFrom(request.session.get("project"))
+            val result = f(Context(request,account,project))
             result.withHeaders(CACHE_CONTROL -> "no-cache")
         }
     }

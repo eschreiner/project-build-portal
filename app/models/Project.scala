@@ -39,6 +39,18 @@ object Project extends DbNamedAccess[Project] {
     import org.squeryl.annotations.Column
     import org.squeryl.dsl._
 
+	def recoverFrom(cookie: Option[String]): Option[Project] = inTransaction {
+        cookie flatMap (c => {
+        	recoverQ(c).headOption
+        })
+    }
+
+	private def recoverQ(cookie: String): Query[Project] = from(table) (
+		project =>
+			where(project.id === cookie.toLong)
+			select(project)
+    )
+
     def forUserQ(userID: Long): Query[Project] = from(table) (
         project =>
             where(project.owner_id === userID)

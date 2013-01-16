@@ -1,5 +1,5 @@
 @(project: Project)(implicit context: util.Context[_], flash: Flash, lang: Lang)
 
 @for(milestone <- Milestone.listFor(project)) {
-	@milestones.control(milestone)
+	@milestones.control(project,milestone)
 }

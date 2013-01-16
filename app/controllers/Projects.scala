@@ -16,10 +16,20 @@ object Projects extends Controller {
 
     import ControllerHelpers._
     import models._
+    import util.Context
     import views.html._
 
-    def show(project: Project) = ActionWithContext { implicit context =>
-        Ok(projects.details(project))
+    private def ActionWithProject(project: Option[Project])(f: Context[AnyContent] => PlainResult) = {
+        Action { request =>
+            val cookie = request.session.get("session")
+            val account = Stakeholder.recoverFrom(cookie,request.remoteAddress)
+            val result = f(Context(request,account,project))
+            result.withHeaders(CACHE_CONTROL -> "no-cache")
+        }
+    }
+
+    def show(project: Project) = ActionWithProject(Option(project)) { implicit context =>
+        Ok(projects.details(project)).withSession(context.request.session + ("project" -> project.id.toString()))
     }
 
     def list() = ActionWithContext { implicit context =>
