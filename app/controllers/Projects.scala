@@ -65,4 +65,8 @@ object Projects extends Controller {
         Ok(projects.listInline())
     }
 
+    def showInline(project: Project) = ActionWithContext { implicit context =>
+        Ok(projects.control(project))
+    }
+
 }

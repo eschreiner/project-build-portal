@@ -26,6 +26,7 @@ GET		/projects					controllers.Projects.list
 GET		/projectList				controllers.Projects.listInline
 POST	/projects					controllers.Projects.add
 GET		/project/:project			controllers.Projects.show(project: models.Project)
+GET		/projectInline/:project		controllers.Projects.showInline(project: models.Project)
 POST	/project/name				controllers.Projects.updateName
 
 # Milestones

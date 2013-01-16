@@ -51,7 +51,12 @@ function update_title(newTitle) {
 		data: "id=@project.id&name="+ newTitle,
         success: function(msg) {
             reportSuccess(msg);
-            $("#projectList").load('/projectList');
+            $("#project@project.id").load('/projectInline/@project.id', function() {
+           		var button = $("#project@project.id").find(".btn"); 
+            	button.addClass("btn-updated").delay(60000).fadeIn(100,function() {
+            		$(this).removeClass("btn-updated");
+            	});
+            });
         }
 	});
 }
