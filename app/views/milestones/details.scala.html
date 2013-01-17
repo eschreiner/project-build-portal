@@ -44,7 +44,10 @@ function update_title(newTitle) {
 	$.ajax({
 		url: "@routes.Milestones.updateName()",
 		type: "POST",
-		data: "id=@milestone.id&name="+ newTitle,
+		data: {
+			id: '@milestone.id',
+			name: newTitle
+		},
         success: reportSuccess
 	});
 }
@@ -52,7 +55,10 @@ function update_date(newDate,control) {
 	$.ajax({
 		url: "@routes.Milestones.updateDeadline()",
 		type: "POST",
-		data: "id=@milestone.id&deadline="+ newDate,
+		data: {
+			id: '@milestone.id',
+			deadline: newDate
+		},
         success: reportSuccess
 	});
 }

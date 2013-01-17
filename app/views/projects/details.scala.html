@@ -48,7 +48,10 @@ function update_title(newTitle) {
 	$.ajax({
 		url: "@routes.Projects.updateName()",
 		type: "POST",
-		data: "id=@project.id&name="+ newTitle,
+		data: {
+			id: '@project.id',
+			name: newTitle
+		},
         success: function(msg) {
             reportSuccess(msg);
             $('#projectList').load('/projectList', function() {

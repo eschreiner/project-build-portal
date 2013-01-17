@@ -35,7 +35,10 @@ function update_title(newTitle) {
 	$.ajax({
 		url: "@routes.Versions.updateName()",
 		type: "POST",
-		data: "id=@version.id&name="+ newTitle,
+		data: {
+			id: '@version.id',
+			name: newTitle
+		},
         success: function(msg) {
             $("#messages-success").text(msg);
             $("#messages-success").fadeIn().delay(3000).fadeOut();
@@ -46,11 +49,11 @@ function update_version(newTag) {
 	$.ajax({
 		url: "@routes.Versions.updateTag()",
 		type: "POST",
-		data: "id=@version.id&tag="+ newTag,
-        success: function(msg) {
-            $("#messages-success").text(msg);
-            $("#messages-success").fadeIn().delay(3000).fadeOut();
-        }
+		data: {
+			id: '@version.id',
+			tag: newTag
+		},
+        success: reportSuccess
 	});
 }
 </script>
