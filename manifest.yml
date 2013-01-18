@@ -1,0 +1,14 @@
+---
+applications:
+- name: project-build-portal
+  framework: play
+  runtime: java
+  memory: 1G
+  instances: 1
+  url: project-build-portal.${target-base}
+  path: .\dist\pbp-0.1-SNAPSHOT.zip
+  services:
+    pbpdb:
+      vendor: postgresql
+      version: '9.0'
+      tier: free
