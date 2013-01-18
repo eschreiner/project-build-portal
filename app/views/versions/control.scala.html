@@ -1,11 +1,17 @@
-@(version: Version)(implicit context: util.Context[_], flash: Flash, lang: Lang)
+@(product: Product,version: Version)(implicit context: util.Context[_], flash: Flash, lang: Lang)
 <div class="hidden-controls" style="float: left; width: 100%;">
 	<div class="controls" style="float: right; top: 0; right: 0; padding: 0px; z-index: 9999;">
 		<div class="controls-group">
-			<div class="btn btn-success activateVersion"><i class="icon-play"></i></div>
+			<div class="btn btn-success activateProductVersion"><i class="icon-play"></i></div>
 		</div>
 	</div>
-	<div class="btn" data-milestone-id="milestone.id" style="width: 70%; text-align: left"
+	<div class="btn
+		@for(version_id <- product.version_id) {
+			@if(version_id == version.id) {
+				btn-success
+			}
+		}
+	" data-product-id="@product.id" data-version-id="@version.id" style="width: 70%; text-align: left"
 		onclick="location.href='@routes.Versions.show(version)'">
 		<b>@version.name</b> - @version.tag
 	</div>

@@ -56,4 +56,9 @@ object Products extends Controller {
         Accepted("title saved")
     }
 
+    def selectVersion(product_id: Long, version_id: Long) = ActionWithContext { implicit context =>
+    	Product.selectVersion(product_id, Option(version_id))
+    	Accepted("version selected")
+    }
+
 }

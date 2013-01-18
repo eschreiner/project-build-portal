@@ -1,0 +1,5 @@
+@(product: Product)(implicit context: util.Context[_], flash: Flash, lang: Lang)
+
+@for(version <- Version.listFor(product)) {
+	@versions.control(product,version)
+}

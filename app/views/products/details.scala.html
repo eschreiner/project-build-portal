@@ -16,9 +16,9 @@
 	<div class="row-fluid">	
 		<div class="span4">
 			<h5>Versions</h5>
-			@for(version <- Version.listFor(product)) {
-				@versions.control(version)
-			}
+			<div id="versionList">
+				@versions.listInline(product)
+			</div>
 			@helper.form(action = routes.Versions.add(), 'style -> "margin: 0px;") {
 				<input name="product_id" type="hidden" value="@product.id">
 				<input name="name" style="width: 80%; margin-top: 6px;" placeholder="@Messages("version.create")">

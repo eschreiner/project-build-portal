@@ -81,4 +81,8 @@ object Versions extends Controller {
         )
     }
 
+    def listInline(product: Product) = ActionWithContext { implicit context =>
+        Ok(versions.listInline(product))
+    }
+
 }

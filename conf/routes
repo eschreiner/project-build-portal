@@ -20,6 +20,7 @@ GET		/products					controllers.Products.list
 POST	/products					controllers.Products.add
 GET		/product/:product			controllers.Products.show(product: models.Product)
 POST	/product/name				controllers.Products.updateName
+POST	/product/:product_id/version/:version_id	controllers.Products.selectVersion(product_id: Long,version_id: Long)
 
 # Projects
 GET		/projects					controllers.Projects.list
@@ -36,8 +37,10 @@ GET		/milestone/:milestone		controllers.Milestones.show(milestone: models.Milest
 POST	/milestone/name				controllers.Milestones.updateName
 POST	/milestone/deadline			controllers.Milestones.updateDeadline
 POST	/milestone/activate/:milestone	controllers.Milestones.activate(milestone: models.Milestone)
+#POST	/milestone/version/:milestone	controllers.Milestons.version(milestone: models.Milestone)
 
 # Versions
+GET		/versionList/:product		controllers.Versions.listInline(product: models.Product)
 POST	/versions					controllers.Versions.add
 GET		/version/:version			controllers.Versions.show(version: models.Version)
 POST	/version/name				controllers.Versions.updateName

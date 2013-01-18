@@ -5,7 +5,7 @@ package models
  * @version 0.1.0.0
  * @since   0.1.0.0
  */
-case class Product(name: String) extends DbNamedEntity {
+case class Product(name: String, version_id: Option[Long] = None) extends DbNamedEntity {
 
 }
 
@@ -25,7 +25,18 @@ object Product extends DbNamedAccess[Product] {
         }
     }
 
-    import Database.productTable
-    val table = productTable
+    val table = Database.productTable
+
+    import org.squeryl.PrimitiveTypeMode._
+    import org.squeryl.Query
+    import org.squeryl.annotations.Column
+    import org.squeryl.dsl._
+
+    def selectVersion(id: Long, version_id: Option[Long]) = inTransaction {
+        update(table)(entity =>
+            where(entity.id === id)
+            set(entity.version_id := version_id)
+        )
+    }
 
 }
