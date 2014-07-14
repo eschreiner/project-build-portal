@@ -8,10 +8,18 @@ import org.squeryl.PrimitiveTypeMode._
  * @since   0.1.0.0
  */
 case class Project(name: String, owner_id: Long, dormant: Boolean = false, milestone_id: Option[Long] = None) extends DbNamedEntity {
+
     import models.Database.productUsedTable
+    import models.Database.projectStakeholderTable
+
     lazy val products = productUsedTable.left(this)
     def productList(): Seq[Product] = inTransaction {
         products.toList
+    }
+
+    lazy val stakeholders = projectStakeholderTable.left(this)
+    def stakeholderList(): Seq[Stakeholder] = inTransaction {
+        stakeholders.toList
     }
 }
 

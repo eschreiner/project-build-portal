@@ -19,6 +19,8 @@ object Database extends Schema {
     val milestoneTable = table[Milestone]("milestone")
     val versionTable = table[Version]("version")
     val stakeholderTable = table[Stakeholder]("stakeholder")
+    val projectStakeholderTable = manyToManyRelation(projectTable,stakeholderTable,"project_stakeholder").
+            via[ProjectStakeholder]((proj,stak,inv) => (inv.project_id === proj.id, inv.stakeholder_id === stak.id))
     val tokenTable = table[Token]("token")
 
     on(productTable) { e => declare (
