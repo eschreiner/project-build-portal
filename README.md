@@ -17,8 +17,8 @@ A predecessor of PBP is used at my day job, but I decided to re-implement its ba
 
 The PBP backend is implemented using following tools and libraries:
 
-* written in [Scala] in version 2.10.3
-* using the [Play!] framework, in version 2.1.0
+* written in [Scala] in version 2.11.1
+* using the [Play!] framework, in version 2.3.1
 * and [Squeryl], an [ORM] and database query [DSL], in version 0.9.5-6
 
 ##### Frontend
